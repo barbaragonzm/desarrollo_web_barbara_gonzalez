@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <title>¿Que hace la comunidad DCC en su tiempo libre?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1> Registro de Actividad</h1>
+    <main>
+        <h2>Formulario para el registro de actividades de los miembros de la comunidad</h2>
+        <p>
+            En esta sección podrás registrar información acerca de las actividades que realiza la comunidad, indicando que actividad realizo,
+            a que tipo de actividad corresponde, que días la realiza y cuantas horas semanales le toma.Ademas debe adjuntar una imagen asociada a la actividad y un enlace 
+            para obtener mas contenido de dicha actividad.
+        </p>
+        <p>
+           <strong>Completa los datos solicitados para realizar el registro correctamente. </strong> 
+        </p>
+    </main>
+    <form class="formulario" id="form-actividad">
+    
+    <div class="grupo-input">
+        <label for="nombre-actividad">Nombre de la Actividad</label>
+        <input type="text" id="nombre-actividad" name="nombre_actividad" class="input-registro" >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="tipo-actividad">Tipo de Actividad</label>
+        <select id="tipo-actividad" name="tipo_actividad" class="input-registro" >
+            <option value="" disabled selected>Seleccione una categoría...</option>
+            <option value="artistica">Artística</option>
+            <option value="deportiva">Deportiva</option>
+            <option value="social">Social / Voluntariado</option>
+            <option value="recreativa">Recreativa</option>
+            <option value="academica">Académica / Estudio</option>
+            <option value="tecnologica">Tecnológica / Programación</option>
+            <option value="bienestar">Bienestar / Meditación</option>
+            <option value="otra">Otra...</option>
+        </select>
+    </div>
+    <br>
+    <div class="grupo-input">
+        <p>¿Qué días de la semana la realizó?</p>
+        <div class="opciones-dias">
+            <label><input type="checkbox" name="dias[]" value="lunes"> Lunes</label>
+            <label><input type="checkbox" name="dias[]" value="martes"> Martes</label>
+            <label><input type="checkbox" name="dias[]" value="miercoles"> Miércoles</label>
+            <label><input type="checkbox" name="dias[]" value="jueves"> Jueves</label>
+            <label><input type="checkbox" name="dias[]" value="viernes"> Viernes</label>
+            <label><input type="checkbox" name="dias[]" value="sabado"> Sabado</label>
+            <label><input type="checkbox" name="dias[]" value="domingo"> Domingo</label>
+        </div>
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="horas">Total de horas semanales dedicadas</label>
+        <input type="number" id="horas" name="horas_semanales" class="input-registro" min="1" max="168" >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="foto">Sube una imagen de la actividad</label>
+        <input type="file" id="foto" name="foto_actividad" class="input-registro" accept="image/*" >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="link">Enlace con más contenido </label>
+        <input type="url" id="link" name="url_contenido" class="input-registro"  >
+    </div>
+    <br>
+    <button type="submit" class="boton-registro">Registrar Actividad</button>
+
+</form>
+<div id="errores" style="color:red; margin-top:10px;"></div>
+<div id="mensaje-actividad" style="margin-top: 10px;"></div>
+
+<script src="registro_actividades.js"></script>
+
+</body>
+</html>
