@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <title>¿Que hace la comunidad DCC en su tiempo libre?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <main>
+        <a href="{{ url_for('inicio') }}">Volver al inicio</a>
+        <h1>Lista de Actividades de la Comunidad</h1>
+  <p>
+    En esta sección puedes explorar todos los miembros de la comunidad y las actividades que realizan. 
+    Puedes filtrar la información seleccionando uno o varios tipos de personas (Estudiante, Funcionario, Académico) 
+    y una o varias categorías de actividades (Artística, Deportiva, Social, Recreativa, Académica, Tecnológica o Bienestar). 
+    La tabla mostrará únicamente los miembros que cumplan con los criterios seleccionados, 
+    facilitando la búsqueda y el análisis de la participación de la comunidad.
+  </p>
+
+  <div id="busqueda-container" style="margin-bottom: 20px;">
+    <label for="buscadorNombre"><strong>Buscar miembro por nombre:</strong></label>
+    <input type="text" id="buscadorNombre" placeholder="Ej: Juan Pérez..." style="width: 100%; padding: 8px; margin-top: 5px;">
+</div>
+
+    <div id="filtros">
+  <fieldset>
+    <legend>Tipo de persona:</legend>
+    <label><input type="checkbox" class="filtro-tipo" value="Estudiante"> Estudiante</label>
+    <label><input type="checkbox" class="filtro-tipo" value="Funcionario"> Funcionario</label>
+    <label><input type="checkbox" class="filtro-tipo" value="Académico"> Académico</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Actividades:</legend>
+        <label><input type="checkbox" class="filtro-actividad" value="artistica"> Artística</label>
+    <label><input type="checkbox" class="filtro-actividad" value="deportiva"> Deportiva</label>
+    <label><input type="checkbox" class="filtro-actividad" value="social"> Social / Voluntariado</label>
+    <label><input type="checkbox" class="filtro-actividad" value="recreativa"> Recreativa</label>
+    <label><input type="checkbox" class="filtro-actividad" value="academica"> Académica / Estudio</label>
+    <label><input type="checkbox" class="filtro-actividad" value="tecnologica"> Tecnológica / Programación</label>
+    <label><input type="checkbox" class="filtro-actividad" value="bienestar"> Bienestar / Meditación</label>
+  </fieldset>
+
+  <button id="aplicarFiltros">Aplicar filtros</button>
+</div id="listaContenedor">
+    <table id="tablaMiembros">
+        <thead>
+             <tr>
+                <th>Nombre</th>
+                <th>Tipo de Persona</th>
+                <th>Correo</th>
+                 <th>Actividad</th>
+                <th>Tipo de Actividad</th>
+                <th>Dia/Hora</th>
+                <th>Foto</th>
+                <th>Link a contenido extra sobre la actividad</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpoTabla">
+        </tbody>
+    </table>
+</div>
+
+    
+<div id="paginacion" style="margin-top: 20px;"></div>
+
+<script src="{{ url_for('static', filename='js/listado.js') }}"></script>
+</body>
+</html>

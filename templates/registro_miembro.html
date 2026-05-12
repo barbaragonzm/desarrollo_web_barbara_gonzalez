@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <title>¿Que hace la comunidad DCC en su tiempo libre?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <a href="{{ url_for('inicio') }}">← Volver al inicio</a>
+    <h1>Registro de Miembros </h1>
+    <main>
+        <h2>Formulario para el registro de miembros de la comunidad</h2>
+        <p>
+            En esta sección podrás registrar información de los integrantes de la comunidad del DCC, 
+            incluyendo estudiantes, académicos y funcionarios.
+        </p>
+        <p>
+            Completa los datos solicitados para identificar y contactar a cada persona. 
+        </p>
+    </main>
+    <form class="formulario" id="registro-miembro" method="POST" action="{{ url_for('registrar') }}">
+    <div class="grupo-input">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" class="input-registro" >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="apellido">Apellido</label>
+        <input id="apellido" name="apellido" type="text" class="input-registro" >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" class="input-registro" >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" name="telefono" type="tel" class="input-registro" placeholder="Ej: 912345678">
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="tipo-integrante">Tipo de Integrante</label>
+        <select id="tipo-integrante" name="tipo_integrante" class="input-registro">
+            <option value="" disabled selected>Seleccione una opción...</option>
+            <option value="funcionario">Funcionario</option>
+            <option value="academico">Académico</option>
+            <option value="estudiante">Estudiante</option>
+        </select>
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="comuna">Comuna de residencia</label>
+        <select id="comuna" name="comuna_id" class="input-registro" required>
+            <option value="" disabled selected>Seleccione una comuna...</option>
+            {% for c in comunas %}
+                <option value="{{ c.id }}">{{ c.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+    <button type="submit" class="boton-registro">Registrarme</button>
+
+    </form>
+<div id="errores" style="color:red; margin-top:10px;">
+    
+<hr>
+<h3>Últimos 5 miembros registrados:</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for m in ultimos_miembros %}
+        <tr>
+            <td>{{ m.nombre }}</td>
+            <td>{{ m.tipo }}</td>
+            <td>{{ m.fecha_registro.strftime('%d/%m/%Y') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<script src="{{ url_for('static', filename='js/registro_miembro.js') }}"></script>
+</body>
+</html>

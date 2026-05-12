@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <title>¿Que hace la comunidad DCC en su tiempo libre?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <a href="{{ url_for('inicio') }}">← Volver al inicio</a>
+    <h1> Registro de Actividad</h1>
+    <main>
+        <h2>Formulario para el registro de actividades de los miembros de la comunidad</h2>
+        <p>
+            En esta sección podrás registrar información acerca de las actividades que realiza la comunidad, indicando que actividad realizo,
+            a que tipo de actividad corresponde, que días la realiza y cuantas horas semanales le toma.Ademas debe adjuntar una imagen asociada a la actividad y un enlace 
+            para obtener mas contenido de dicha actividad.
+        </p>
+        <p>
+           <strong>Completa los datos solicitados para realizar el registro correctamente. </strong> 
+        </p>
+    </main>
+    <form class="formulario" id="form-actividad" method="POST" action="{{ url_for('actividades') }}" enctype="multipart/form-data">
+    <div class="grupo-input">
+        <label for="miembro_id">¿A qué miembro pertenece esta actividad?</label>
+        <select name="miembro_id" id="miembro_id" required>
+            <option value="">Seleccione un miembro...</option>
+            {% for m in miembros %}
+                <option value="{{ m.id }}">{{ m.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="nombre-actividad">Nombre de la Actividad</label>
+        <input type="text" id="nombre-actividad" name="nombre_actividad" class="input-registro" >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="tipo-actividad">Tipo de Actividad</label>
+        <select id="tipo-actividad" name="tipo_actividad" class="input-registro" >
+            <option value="" disabled selected>Seleccione una categoría...</option>
+            <option value="artistica">Artística</option>
+            <option value="deportiva">Deportiva</option>
+            <option value="social">Social / Voluntariado</option>
+            <option value="recreativa">Recreativa</option>
+            <option value="academica">Académica / Estudio</option>
+            <option value="tecnologica">Tecnológica / Programación</option>
+            <option value="bienestar">Bienestar / Meditación</option>
+            <option value="otra">Otra...</option>
+        </select>
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="dia">Día de la semana que realizo la actividad</label>
+        <select name="dia" id="dia">
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+            </select>
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="hora_inicio">Hora de Inicio</label>
+        <input type="time" name="hora_inicio" id="hora_inicio" required>
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="duracion">Duración (HH:MM)</label>
+        <input type="time" name="duracion" id="duracion" required>
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="foto">Sube una imagen de la actividad</label>
+        <input type="file" id="foto" name="foto_actividad" class="input-registro" accept="image/*" >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="link">Enlace con más contenido </label>
+        <input type="url" id="link" name="url_contenido" class="input-registro"  >
+    </div>
+    <br>
+    <div class="grupo-input">
+        <label for="descripcion">Descripción de la actividad</label>
+        <textarea name="descripcion" id="descripcion" rows="3"></textarea>
+    </div>
+    <br>
+    <button type="submit" class="boton-registro">Registrar Actividad</button>
+
+</form>
+<div id="errores" style="color:red; margin-top:10px;"></div>
+<div id="mensaje-actividad" style="margin-top: 10px;"></div>
+
+<script src="{{ url_for('static', filename='js/registro_actividades.js') }}"></script>
+
+</body>
+</html>

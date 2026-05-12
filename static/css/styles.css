@@ -1,0 +1,101 @@
+
+* {
+    margin: 1;
+    padding: 1;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+header h1 {
+    text-align: center; 
+    font-size: 2rem;
+    color: #1f6feb;
+    margin-bottom: 10px; /* separa del menú */
+}
+
+body {
+    background-color: #f0f4f8;
+}
+
+
+nav {
+    width: 100%;
+    background-color: #1f6feb;
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: center; 
+    gap: 20px;
+}
+
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+
+section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 800px;
+}
+
+
+h2 {
+    color: #1f6feb;
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #1f6feb;
+    color: #fff;
+    font-weight: 600;
+}
+
+.formulario {
+    background-color: #f8f9fa;
+    padding: 10px;
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+.grupo-input {
+    margin-bottom: 10px;
+}
+
+.input-registro {
+    padding: 6px;
+    border: 1px solid #ccc;
+    
+}
+
+.boton-registro {
+    background-color: #1f6feb;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    
+    
+}
+
