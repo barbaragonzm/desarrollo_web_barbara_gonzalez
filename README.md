@@ -22,7 +22,7 @@ Se tomo la decision de poner en el formulario de registro de actividades, los di
 
 Igualmente en los filtros del listado se aplico la misma logica para que el usuario modificara los filtros a su gusto.Los filtros son de tipo de miembro y tipo de actividad, ya que creo que en la practica serviria mas hacer este tipo de filtro para las metricas, ya que  es mucho mas interesante ver que actividades hacen los funcionarios o estudiantes, o cuanta gente realiza cierto tipo de actividad.
 
-#Documentación de la Tarea 2 
+# Documentación de la Tarea 2 
 Para el desarrollo de esta aplicación decidí organizar el proyecto siguiendo la estructura recomendada por Flask, separando la lógica del servidor en el archivo principal y ordenando todos los elementos visuales en carpetas específicas. Esto me permitió trabajar de forma más ordenada, dejando los archivos HTML dentro de la carpeta de plantillas y los estilos o scripts de JavaScript en la carpeta de archivos estáticos.
 
 Uno de los cambios más importantes que realicé fue ajustar la base de datos que venía originalmente. Me di cuenta de que al intentar registrar algunas actividades, el sistema arrojaba errores porque los nombres o las categorías eran muy largos o no coincidían exactamente con lo que el formulario enviaba. Por esta razón, edité el archivo SQL para ampliar el espacio de los textos y actualicé las categorías permitidas para que incluyeran opciones más modernas que hacían falta, como programación o bienestar. 
