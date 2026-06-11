@@ -1,69 +1,191 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    
     <title>¿Que hace la comunidad DCC en su tiempo libre?</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Modal de detalle de actividad */
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        #modal-overlay.activo { display: flex; }
+        #modal-box {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            padding: 28px 32px;
+            max-width: 560px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        #modal-box h3 { color: #1f6feb; margin-bottom: 10px; }
+        #modal-cerrar {
+            position: absolute;
+            top: 12px; right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #555;
+        }
+        #modal-cerrar:hover { color: #c0392b; }
+        .detalle-campo { margin-bottom: 7px; font-size: 0.97rem; }
+        .detalle-campo strong { color: #1f6feb; }
+
+        /* Comentarios */
+        #seccion-comentarios { margin-top: 20px; border-top: 1px solid #e0e0e0; padding-top: 16px; }
+        #seccion-comentarios h4 { color: #1f6feb; margin-bottom: 10px; }
+        .comentario-item {
+            background: #f0f4f8;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            font-size: 0.93rem;
+        }
+        .comentario-item .com-meta { color: #888; font-size: 0.82rem; margin-bottom: 3px; }
+        .comentario-item .com-texto { color: #222; }
+
+        /* Formulario comentario */
+        #form-comentario { margin-top: 16px; }
+        #form-comentario .grupo-input { margin-bottom: 10px; }
+        #form-comentario label { display: block; margin-bottom: 3px; font-size: 0.93rem; font-weight: bold; color: #333; }
+        #form-comentario input[type="text"],
+        #form-comentario textarea {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.93rem;
+            box-sizing: border-box;
+        }
+        #form-comentario textarea { resize: vertical; }
+        #errores-comentario { color: #c0392b; font-size: 0.9rem; margin-bottom: 8px; }
+        #msg-comentario { color: #1f6feb; font-size: 0.9rem; margin-bottom: 8px; font-weight: bold; }
+        .boton-comentario {
+            background-color: #1f6feb;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.93rem;
+        }
+        .boton-comentario:hover { background-color: #155bb5; }
+
+        /* Botón "Ver detalle" en la tabla */
+        .btn-detalle {
+            background: #1f6feb;
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .btn-detalle:hover { background: #155bb5; }
+    </style>
 </head>
 <body>
-    <main>
-        <a href="{{ url_for('inicio') }}">Volver al inicio</a>
-        <h1>Lista de Actividades de la Comunidad</h1>
-  <p>
-    En esta sección puedes explorar todos los miembros de la comunidad y las actividades que realizan. 
-    Puedes filtrar la información seleccionando uno o varios tipos de personas (Estudiante, Funcionario, Académico) 
-    y una o varias categorías de actividades (Artística, Deportiva, Social, Recreativa, Académica, Tecnológica o Bienestar). 
-    La tabla mostrará únicamente los miembros que cumplan con los criterios seleccionados, 
-    facilitando la búsqueda y el análisis de la participación de la comunidad.
-  </p>
+    <header>
+    <h1>¿Que hace la comunidad DCC en su tiempo libre?</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('registrar') }}">Registro de Miembros</a></li>
+            <li><a href="{{ url_for('actividades') }}">Registro de Actividades</a></li>
+            <li><a href="{{ url_for('miembros') }}">Listado</a></li>
+            <li><a href="{{ url_for('estadisticas') }}">Estadísticas</a></li>
+        </ul>
+    </nav>
+</header>
 
-  <div id="busqueda-container" style="margin-bottom: 20px;">
-    <label for="buscadorNombre"><strong>Buscar miembro por nombre:</strong></label>
-    <input type="text" id="buscadorNombre" placeholder="Ej: Juan Pérez..." style="width: 100%; padding: 8px; margin-top: 5px;">
-</div>
+<main style="padding:20px;">
+    <a href="{{ url_for('inicio') }}">← Volver al inicio</a>
+    <h2 style="color:#1f6feb; margin-top:12px;">Lista de Actividades de la Comunidad</h2>
+    <p>
+        Explora todos los miembros y las actividades que realizan.
+        Puedes filtrar por tipo de persona y categoría de actividad.
+        Haz clic en "Ver detalle" para ver la información completa y agregar comentarios.
+    </p>
+
+    <div id="busqueda-container" style="margin-bottom:16px;">
+        <label for="buscadorNombre"><strong>Buscar miembro por nombre:</strong></label>
+        <input type="text" id="buscadorNombre" placeholder="Ej: Juan Pérez..." style="width:100%; padding:8px; margin-top:5px;">
+    </div>
 
     <div id="filtros">
-  <fieldset>
-    <legend>Tipo de persona:</legend>
-    <label><input type="checkbox" class="filtro-tipo" value="Estudiante"> Estudiante</label>
-    <label><input type="checkbox" class="filtro-tipo" value="Funcionario"> Funcionario</label>
-    <label><input type="checkbox" class="filtro-tipo" value="Académico"> Académico</label>
-  </fieldset>
+        <fieldset>
+            <legend>Tipo de persona:</legend>
+            <label><input type="checkbox" class="filtro-tipo" value="estudiante"> Estudiante</label>
+            <label><input type="checkbox" class="filtro-tipo" value="funcionario"> Funcionario</label>
+            <label><input type="checkbox" class="filtro-tipo" value="academico"> Académico</label>
+        </fieldset>
+        <fieldset>
+            <legend>Actividades:</legend>
+            <label><input type="checkbox" class="filtro-actividad" value="artistica"> Artística</label>
+            <label><input type="checkbox" class="filtro-actividad" value="deportiva"> Deportiva</label>
+            <label><input type="checkbox" class="filtro-actividad" value="social/voluntariado"> Social / Voluntariado</label>
+            <label><input type="checkbox" class="filtro-actividad" value="recreativa"> Recreativa</label>
+            <label><input type="checkbox" class="filtro-actividad" value="academica"> Académica / Estudio</label>
+            <label><input type="checkbox" class="filtro-actividad" value="tecnologica/programacion"> Tecnológica / Programación</label>
+            <label><input type="checkbox" class="filtro-actividad" value="bienestar/meditacion"> Bienestar / Meditación</label>
+        </fieldset>
+        <button id="aplicarFiltros" class="boton-registro">Aplicar filtros</button>
+    </div>
 
-  <fieldset>
-    <legend>Actividades:</legend>
-        <label><input type="checkbox" class="filtro-actividad" value="artistica"> Artística</label>
-    <label><input type="checkbox" class="filtro-actividad" value="deportiva"> Deportiva</label>
-    <label><input type="checkbox" class="filtro-actividad" value="social"> Social / Voluntariado</label>
-    <label><input type="checkbox" class="filtro-actividad" value="recreativa"> Recreativa</label>
-    <label><input type="checkbox" class="filtro-actividad" value="academica"> Académica / Estudio</label>
-    <label><input type="checkbox" class="filtro-actividad" value="tecnologica"> Tecnológica / Programación</label>
-    <label><input type="checkbox" class="filtro-actividad" value="bienestar"> Bienestar / Meditación</label>
-  </fieldset>
-
-  <button id="aplicarFiltros">Aplicar filtros</button>
-</div id="listaContenedor">
-    <table id="tablaMiembros">
+    <table id="tablaMiembros" style="margin-top:16px;">
         <thead>
-             <tr>
+            <tr>
                 <th>Nombre</th>
-                <th>Tipo de Persona</th>
+                <th>Tipo</th>
                 <th>Correo</th>
-                 <th>Actividad</th>
-                <th>Tipo de Actividad</th>
-                <th>Dia/Hora</th>
+                <th>Actividad</th>
+                <th>Tipo Actividad</th>
+                <th>Día / Hora</th>
                 <th>Foto</th>
-                <th>Link a contenido extra sobre la actividad</th>
-                <th>Descripcion</th>
+                <th>Detalle</th>
             </tr>
         </thead>
-        <tbody id="cuerpoTabla">
-        </tbody>
+        <tbody id="cuerpoTabla"></tbody>
     </table>
-</div>
 
-    
-<div id="paginacion" style="margin-top: 20px;"></div>
+    <div id="paginacion" style="margin-top:20px;"></div>
+</main>
+
+
+<div id="modal-overlay">
+    <div id="modal-box">
+        <button id="modal-cerrar" title="Cerrar">✕</button>
+        <h3 id="modal-titulo">Detalle de Actividad</h3>
+        <div id="modal-contenido"></div>
+
+        <div id="seccion-comentarios">
+            <h4>Comentarios</h4>
+            <div id="lista-comentarios"><p style="color:#888; font-style:italic;">Cargando comentarios...</p></div>
+
+            <div id="form-comentario">
+                <div id="errores-comentario"></div>
+                <div id="msg-comentario"></div>
+                <div class="grupo-input">
+                    <label for="input-nombre-com">Nombre del comentarista *</label>
+                    <input type="text" id="input-nombre-com" minlength="3" maxlength="80" placeholder="Tu nombre (mínimo 3 caracteres)">
+                </div>
+                <div class="grupo-input">
+                    <label for="input-texto-com">Comentario *</label>
+                    <textarea id="input-texto-com" rows="4" cols="50" placeholder="Escribe tu comentario (mínimo 5 caracteres)..."></textarea>
+                </div>
+                <button class="boton-comentario" id="btn-agregar-comentario">Agregar comentario</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="{{ url_for('static', filename='js/listado.js') }}"></script>
 </body>

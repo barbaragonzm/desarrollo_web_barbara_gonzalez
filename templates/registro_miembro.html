@@ -6,14 +6,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    <header>
+    <h1>¿Que hace la comunidad DCC en su tiempo libre?</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('registrar') }}">Registro de Miembros</a></li>
+            <li><a href="{{ url_for('actividades') }}">Registro de Actividades</a></li>
+            <li><a href="{{ url_for('miembros') }}">Listado</a></li>
+            <li><a href="{{ url_for('estadisticas') }}">Estadísticas</a></li>
+        </ul>
+    </nav>
+</header>
     <a href="{{ url_for('inicio') }}">← Volver al inicio</a>
-    <h1>Registro de Miembros </h1>
+    
     <main>
-        <h2>Formulario para el registro de miembros de la comunidad</h2>
-        <p>
-            En esta sección podrás registrar información de los integrantes de la comunidad del DCC, 
-            incluyendo estudiantes, académicos y funcionarios.
-        </p>
+            <h2 style="color:#1f6feb; margin-top:12px;">Registro de Miembros de la comunidad</h2>
+    <p>
+          En esta sección podrás registrar información de los integrantes de la comunidad del DCC, incluyendo estudiantes, académicos y funcionarios.
+    </p>
+        
         <p>
             Completa los datos solicitados para identificar y contactar a cada persona. 
         </p>

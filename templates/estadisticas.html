@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>¿Que hace la comunidad DCC en su tiempo libre?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        .graficos-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .grafico-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        .grafico-card h2 {
+            color: #1f6feb;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        .grafico-wrap {
+            position: relative;
+            height: 320px;
+        }
+        .loading-msg {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+            padding: 30px 0;
+        }
+        .error-msg {
+            color: #c0392b;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .volver-link {
+            display: inline-block;
+            margin: 18px 0 10px 0;
+            color: #1f6feb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .volver-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>¿Que hace la comunidad DCC en su tiempo libre?</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('registrar') }}">Registro de Miembros</a></li>
+            <li><a href="{{ url_for('actividades') }}">Registro de Actividades</a></li>
+            <li><a href="{{ url_for('miembros') }}">Listado</a></li>
+            <li><a href="{{ url_for('estadisticas') }}">Estadísticas</a></li>
+        </ul>
+    </nav>
+</header>
+  <a href="{{ url_for('inicio') }}">← Volver al inicio</a>
+<main class="graficos-container">
+    <h2 style="color:#1f6feb; margin-bottom:8px;">Estadísticas de la Comunidad</h2>
+    <p style="margin-bottom:24px; color:#555;">
+        Visualización de datos reales obtenidos desde la base de datos del sistema.
+    </p>
+
+    
+    <div class="grafico-card">
+        <h2>📈 Miembros registrados por día</h2>
+        <div class="grafico-wrap">
+            <p class="loading-msg" id="loading-lineas">Cargando datos...</p>
+            <canvas id="graficoLineas" style="display:none;"></canvas>
+        </div>
+    </div>
+
+    
+    <div class="grafico-card">
+        <h2>🥧 Total de actividades por tipo</h2>
+        <div class="grafico-wrap">
+            <p class="loading-msg" id="loading-torta">Cargando datos...</p>
+            <canvas id="graficoTorta" style="display:none;"></canvas>
+        </div>
+    </div>
+
+    
+    <div class="grafico-card">
+        <h2>📊 Total de actividades por comuna</h2>
+        <div class="grafico-wrap">
+            <p class="loading-msg" id="loading-barras">Cargando datos...</p>
+            <canvas id="graficoBarras" style="display:none;"></canvas>
+        </div>
+    </div>
+
+   
+</main>
+
+<script src="{{ url_for('static', filename='js/estadisticas.js') }}"></script>
+</body>
+</html>

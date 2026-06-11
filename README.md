@@ -1,8 +1,8 @@
 # Proyecto de Registro de Actividades 
-
+# Documentacion Tarea 1
 Este proyecto consiste en una plataforma web para que los integrantes de la comunidad del DCC puedan registrar las actividades que realizan en su tiempo libre.s.
 
-## Estructura 
+### Estructura 
 Para este proyecto se decidió dividir el contenido en 5 páginas independientes en lugar de una sola. Las páginas se distribuyen en una página principal  y cuatro secciones específicas para cada tipo de requerimiento.
 Esta decisión se tomó por las siguientes razones:
 * **Orden:** Al separar las funciones en páginas distintas,tenemos mayor orden y el usuario tendra mayor claridad de la informacion que presenta cada pagina.
@@ -31,7 +31,26 @@ En cuanto al manejo de las imágenes, elegí guardar las fotos en una carpeta de
 
 Finalmente, configuré el archivo de la aplicación con el usuario y la contraseña solicitados en el curso para que el evaluador pueda ejecutarlo sin tener que modificar el código, ya que habia estado trabajando con una conexion local con otro root.
 
+# Documentacion Tarea 3 
+Se agregaron tres funcionalidades nuevas:
+estadísticas con gráficos reales, sistema de comentarios en actividades,
+y buscador de miembros en el formulario de registro de actividades.
 
+### Estadísticas
+Se modifico la pagina que anteriormente se llamaba Metricas por una llamada Estadisticas donde se muestran  tres gráficos hechos con Chart.js.
+Los datos son reales y se obtienen desde la base de datos con fetch.
+- Gráfico de líneas: muestra cuántos miembros se registraron por día
+- Gráfico de torta: muestra cuántas actividades hay de cada tipo
+- Gráfico de barras: muestra cuántas actividades tienen los miembros de cada comuna
 
+### Comentarios en actividades
+Se agregó una tabla comentario a la base de datos. En el listado de actividades
+hay un botón "Ver detalle" que abre un modal con la info de la actividad y sus comentarios.
+Desde ahí también se puede agregar un nuevo comentario. Todo funciona con fetch, sin
+recargar la página.
+
+### Buscador de miembros
+En el formulario de registro de actividades se reemplazó el select por un buscador.
+El usuario escribe el nombre y aparecen sugerencias. Los datos se cargan con fetch. Implemente esto ya que al ingresar mas miembros la lista era muy larga y era poco practico para el usuario buscar manualmente el miembro con el que queria registrar la actividad.
 
 
