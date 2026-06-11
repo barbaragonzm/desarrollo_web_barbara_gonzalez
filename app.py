@@ -8,7 +8,7 @@ import html
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/fotos'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:barbara@localhost:3306/tarea2'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://cc5002:programacionweb@localhost:3306/tarea2'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = flask_sqlalchemy.SQLAlchemy(app)
