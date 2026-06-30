@@ -1,0 +1,10 @@
+cl\uchile\dcc\tarea4\models\Comuna.class
+cl\uchile\dcc\tarea4\config\CorsConfig.class
+cl\uchile\dcc\tarea4\controllers\ApiController.class
+cl\uchile\dcc\tarea4\services\ApiService.class
+cl\uchile\dcc\tarea4\Tarea4Application.class
+cl\uchile\dcc\tarea4\models\Actividad.class
+cl\uchile\dcc\tarea4\models\ActividadRepository.class
+cl\uchile\dcc\tarea4\models\Nota.class
+cl\uchile\dcc\tarea4\models\NotaRepository.class
+cl\uchile\dcc\tarea4\models\Miembro.class

@@ -54,3 +54,33 @@ En el formulario de registro de actividades se reemplazó el select por un busca
 El usuario escribe el nombre y aparecen sugerencias. Los datos se cargan con fetch. Implemente esto ya que al ingresar mas miembros la lista era muy larga y era poco practico para el usuario buscar manualmente el miembro con el que queria registrar la actividad.
 
 
+# Documentacion Tarea 4
+Se agregaron dos funcionalidades nuevas usando Spring Boot y fetch:
+buscador de actividades y sistema de evaluación (notas) para esas actividades.
+
+ 
+### Buscador de actividades
+En el listado de actividades se agregó un input de texto. Cuando el usuario
+escribe 3 caracteres o más, automáticamente se busca en el nombre, la
+descripción y la comuna de la actividad, sin tener que apretar ningún botón. Las coincidencias del texto buscado quedan resaltadas en
+los resultados. Si no encuentra nada, muestra un mensaje en vez de dejar la
+sección vacía.
+ 
+### Evaluación de actividades (notas)
+Se agregó una tabla nota a la base de datos, donde cada fila es una
+evaluación individual de una actividad (no se guarda un solo número fijo,
+para poder tener varias evaluaciones de distintas personas y sacar un
+promedio). En cada resultado del buscador aparece la nota actual de la
+actividad (o un guión si todavía no tiene ninguna) y un botón "Evaluar" que
+despliega un selector del 1 al 7. Al confirmar, se valida que sea un número
+entero entre 1 y 7 (en el JavaScript y también en el backend, por si alguien
+intenta mandar un valor inválido directo a la API) y se guarda la nota nueva.
+El promedio y el contador de evaluaciones se actualizan al toque en la
+pantalla, sin recargar la página, porque la nota se manda con fetch.
+ 
+### Por qué Flask y Spring Boot a la vez
+No pedian migrar todo el proyecto a Spring Boot, asi que  Flask sigue sirviendo toda la página (puerto 5000) y Spring Boot solo
+expone la API del buscador y las notas (puerto 8080). Como son dos puertos
+distintos, el navegador los trata como orígenes distintos, así que tuve que
+agregar configuración CORS en el backend de Spring Boot para que las
+peticiones fetch no quedaran bloqueadas.

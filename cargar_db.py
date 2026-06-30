@@ -3,7 +3,7 @@
 import pymysql
 
 config = {
-    'host': 'localhost', 'user': 'cc5002', 'password': 'programacionweb',
+    'host': 'localhost', 'user': 'root', 'password': 'barbara',
     'db': 'tarea2', 'charset': 'utf8mb4'
 }
 
